@@ -19,7 +19,7 @@ These are my notes on  how to set up the under listed service, technology for te
 [NPM](https://www.npmjs.com/)
 Version 6.14.14
 
-[Typescript]
+Typescript
 Version 4.9.5
 
 [MongoDB](https://www.mongodb.com/)
@@ -72,7 +72,7 @@ For this project two microservices were defined:
 
 1.**Product Service**: Which is charge of connect to the Public API (https://www.adidas.co.uk/api/products/{product_id}) and aggregate to this response an object with contains the information of Number of Review received by the product and the Average Score of those reviews (information received from the other service).
 
-![image](https://user-images.githubusercontent.com/69249556/222306020-041f7f1a-2333-4df7-a5aa-4b15087657b9.png)
+                       ![image](https://user-images.githubusercontent.com/69249556/222306020-041f7f1a-2333-4df7-a5aa-4b15087657b9.png)
 
 
 In the service the endpoint available is:
@@ -87,4 +87,67 @@ _product/{product_id}_: For which no authentication or authorization is needed, 
   ![image](https://user-images.githubusercontent.com/69249556/222307754-7d7d535a-bbee-4523-87fe-9a79f0aa6f8e.png)
 
 
-2. 
+2. **Product Review Service**: Which is charge on handling all the reviews for all the products and storage them on some database (in this case in a local mongoDB database). For this service the available endpoints are:
+
+    a. GET: /review/:product_id: Will returned the number of reviews associated with a given product and also the average score for this reviews. In this case non authorization is needed. The responses for this endpoint will be related to the possible status codes that are returned:
+    
+    1. **Status Code 200** This mean the request was executed succesfully and the response contains the information describe above. There are two possibles scenarios the first one in which there are some reviews for the product so the response will be something like this:
+        ![image](https://user-images.githubusercontent.com/69249556/222308738-818b7269-d5df-4f74-93a4-ed73810c4138.png)
+        
+        And the other case in which there is not any review for the product so the response will be something like this:
+        ![image](https://user-images.githubusercontent.com/69249556/222308891-ab52f0e0-1754-4afe-9a4f-7b253b1155ad.png)
+        
+    2. **Status Code 500** This mean some error happened during the execution of the request. In this case the response will be something like this:
+        ![image](https://user-images.githubusercontent.com/69249556/222307754-7d7d535a-bbee-4523-87fe-9a79f0aa6f8e.png)
+   
+   b. GET: /review/all/:product_id:  Will returned all the reviews associated with a given product. In this case non authorization is needed. The responses for this endpoint will be related to the possible status codes that are returned:
+   
+    1. **Status Code 200** This mean the request was executed succesfully and the response contains the information describe above. There are two possibles scenarios the first one in which there are some reviews for the product so the response will be something like this:
+        ![image](https://user-images.githubusercontent.com/69249556/222309976-0714753d-b8c3-433e-818e-23a066977890.png)
+        
+        And the other case in which there is not any review for the product so the response will be something like this:
+        ![image](https://user-images.githubusercontent.com/69249556/222308891-ab52f0e0-1754-4afe-9a4f-7b253b1155ad.png)
+        
+    2. **Status Code 500** This mean some error happened during the execution of the request.  In this case the response will be something like this:
+        ![image](https://user-images.githubusercontent.com/69249556/222307754-7d7d535a-bbee-4523-87fe-9a79f0aa6f8e.png)
+  
+     **NOTE**: In order to generate the review_product_id property we are assuming that each user can make one review per product, so the combination username_productid is encoded on base 64.
+     
+    c. GET: /review/id/:review_product_id  Will returned an specific review. In this case non authorization is needed. The responses for this endpoint will be related to the possible status codes that are returned:
+   
+    1. **Status Code 200** This mean the request was executed succesfully and the response contains the information describe above.
+        ![image](https://user-images.githubusercontent.com/69249556/222310795-f544e9aa-8b02-4e5c-82d5-435f65b51361.png)
+        
+    2. **Status Code 404** the request review was not found so the response will be something like this:
+        ![image](https://user-images.githubusercontent.com/69249556/222311356-08c0a472-9baa-420f-8c08-2c22e5576ea6.png)
+        
+    3. **Status Code 500** This mean some error happened during the execution of the request. In this case the response will be something like this:
+        ![image](https://user-images.githubusercontent.com/69249556/222307754-7d7d535a-bbee-4523-87fe-9a79f0aa6f8e.png)
+        
+    d. Delete: /review/:review_product_id  Will delet an specific review. In this case an authorization is needed (the Authorization process will be described in the section below). The responses for this endpoint will be related to the possible status codes that are returned:
+   
+    1. **Status Code 200** This mean the request was executed succesfully and the response will be:
+     ![image](https://user-images.githubusercontent.com/69249556/222311677-63cad4ba-ea05-4598-a7ff-2e92047a56c4.png)
+        
+    2. **Status Code 401** the user information was incorrect or was missing or was not in the correct format that it should be sent. In all this cases the response will be Unauthorized and the message can be
+        --> "User name or Password are incorrect": If the information sent does not match with the information storaged
+        --> "User information is incorrect": If the information is not sent in the appropiate format.
+        --> "No credentials were found": If the Authorization header is not present or if not value is sent.
+        
+    3. **Status Code 500** This mean some error happened during the execution of the request. In this case the response will be something like this:
+        ![image](https://user-images.githubusercontent.com/69249556/222307754-7d7d535a-bbee-4523-87fe-9a79f0aa6f8e.png)
+     
+     e. Delete: /review/:review_product_id  Will delet an specific review. In this case an authorization is needed (the Authorization process will be described in the section below). The responses for this endpoint will be related to the possible status codes that are returned:
+   
+    1. **Status Code 200** This mean the request was executed succesfully and the response will be:
+     ![image](https://user-images.githubusercontent.com/69249556/222311677-63cad4ba-ea05-4598-a7ff-2e92047a56c4.png)
+        
+    2. **Status Code 401** the user information was incorrect or was missing or was not in the correct format that it should be sent. In all this cases the response will be Unauthorized and the message can be:
+        --> "User name or Password are incorrect": If the information sent does not match with the information storaged
+        --> "User information is incorrect": If the information is not sent in the appropiate format.
+        --> "No credentials were found": If the Authorization header is not present or if not value is sent.
+        
+    3. **Status Code 500** This mean some error happened during the execution of the request. In this case the response will be something like this:
+        ![image](https://user-images.githubusercontent.com/69249556/222307754-7d7d535a-bbee-4523-87fe-9a79f0aa6f8e.png)
+        
+
