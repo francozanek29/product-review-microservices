@@ -15,7 +15,7 @@ export class HttpErrorHandler implements ExpressErrorMiddlewareInterface {
         if (error instanceof NotFoundError) {
             http_status_code = 404;
             error_to_show = {
-                message: "The requested product does not exist"
+                message: "The requested review does not exist"
             }
         }else{
             http_status_code = 500;
