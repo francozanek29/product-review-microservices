@@ -1,0 +1,12 @@
+{
+    "name": "products",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "start:docker": "docker-compose build && docker-compose up",
+      "test:all": "npm run test:products && npm run test:reviews",
+      "test:products": "npm run --prefix packages/products test",
+      "test:reviews": "npm run --prefix packages/reviews test"
+    }
+}
