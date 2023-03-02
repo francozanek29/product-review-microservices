@@ -1,0 +1,33 @@
+version: '1'
+services:
+  commercial_db:
+    container_name: ms_commercial-db
+    image: mongo
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./database:/database
+    environment:
+      - MONGO_INITDB_DATABASE=commercial
+  
+  products_service:
+    build: ./packages/products
+    container_name: ms_product-service
+    volumes:
+      - "./packages/products:/src"
+    working_dir: "/src"
+    command: npm run start
+    ports:
+      - "3000:3000"
+  
+  reviews_service:
+    build: ./packages/reviews
+    container_name: ms_review-service
+    volumes:
+      - "./packages/reviews:/src"
+    working_dir: "/src"
+    command: npm run start
+    ports:
+      - "4000:4000"
+    depends_on:
+      - "commercial_db"
