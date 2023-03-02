@@ -8,12 +8,10 @@ These are my notes on  how to set up the under listed service, technology for te
 # Table of Contents :thought_balloon:
 1. [Introduction and technology list](#Introduction-and-technology-list)
 2. [Manual Set-up Guide](#Manual-Set-up-Guide)
-3. [Microservice architecture diagram](#Microservice-architecture-diagram)
-5. [Jenkins Pipeline Sketch](#Jenkins-Pipeline-Sketch)
-6. [Application Request Screenshot](#Application-Request-Screenshot)
-7. [Improvements to be worked on if i had an extra 2days for the task](#Improvements-to-be-worked-on-if-i-had-an-extra-2days-for-the-task)
-8. [Task Mission Statement](#Task-Mission-Statement)
-9. [Thank you](#Thank-you)
+3. [Microservice architecture](#Microservice-architecture)
+4. [Authorization Process](#Authorization-process)
+5. [Task Mission Statement](#Task-Mission-Statement)
+6. [Thank you](#Thank-you)
 
 ## Introduction and technology list :thought_balloon:
 [NPM](https://www.npmjs.com/)
@@ -124,7 +122,7 @@ _product/{product_id}_: For which no authentication or authorization is needed, 
     3. **Status Code 500** This mean some error happened during the execution of the request. In this case the response will be something like this:
         ![image](https://user-images.githubusercontent.com/69249556/222307754-7d7d535a-bbee-4523-87fe-9a79f0aa6f8e.png)
         
-    d. Delete: /review/:review_product_id  Will delet an specific review. In this case an authorization is needed (the Authorization process will be described in the section below). The responses for this endpoint will be related to the possible status codes that are returned:
+    d. DELETE: /review/:review_product_id  Will delete an specific review. In this case an authorization is needed (the Authorization process will be described in the section below). The responses for this endpoint will be related to the possible status codes that are returned:
    
     1. **Status Code 200** This mean the request was executed succesfully and the response will be:
      ![image](https://user-images.githubusercontent.com/69249556/222311677-63cad4ba-ea05-4598-a7ff-2e92047a56c4.png)
@@ -137,7 +135,14 @@ _product/{product_id}_: For which no authentication or authorization is needed, 
     3. **Status Code 500** This mean some error happened during the execution of the request. In this case the response will be something like this:
         ![image](https://user-images.githubusercontent.com/69249556/222307754-7d7d535a-bbee-4523-87fe-9a79f0aa6f8e.png)
      
-     e. Delete: /review/:review_product_id  Will delet an specific review. In this case an authorization is needed (the Authorization process will be described in the section below). The responses for this endpoint will be related to the possible status codes that are returned:
+     e. PUT: /review/:review_product_id  Will update an specific review. In this case an authorization is needed (the Authorization process will be described in the section below). Also for this case, a body should be sent as a JSON object and the properties should be:
+          --> "review_product_username" : string
+          --> "review_product_product_id": string
+          --> "review_product_title": string
+          --> "review_product_description" : string
+          --> "review_product_score": number
+          
+     The responses for this endpoint will be related to the possible status codes that are returned:
    
     1. **Status Code 200** This mean the request was executed succesfully and the response will be:
      ![image](https://user-images.githubusercontent.com/69249556/222311677-63cad4ba-ea05-4598-a7ff-2e92047a56c4.png)
@@ -150,4 +155,59 @@ _product/{product_id}_: For which no authentication or authorization is needed, 
     3. **Status Code 500** This mean some error happened during the execution of the request. In this case the response will be something like this:
         ![image](https://user-images.githubusercontent.com/69249556/222307754-7d7d535a-bbee-4523-87fe-9a79f0aa6f8e.png)
         
+     e. POST: /review  Will add a new review. In this case an authorization is needed (the Authorization process will be described in the section below). Also for this case, a body should be sent as a JSON object and the properties should be:
+          --> "review_product_username" : string
+          --> "review_product_product_id": string
+          --> "review_product_title": string
+          --> "review_product_description" : string
+          --> "review_product_score": number
+          
+     The responses for this endpoint will be related to the possible status codes that are returned:
+   
+    1. **Status Code 200** This mean the request was executed succesfully and the response will be:
+     ![image](https://user-images.githubusercontent.com/69249556/222311677-63cad4ba-ea05-4598-a7ff-2e92047a56c4.png)
+        
+    2. **Status Code 401** the user information was incorrect or was missing or was not in the correct format that it should be sent. In all this cases the response will be Unauthorized and the message can be:
+        --> "User name or Password are incorrect": If the information sent does not match with the information storaged
+        --> "User information is incorrect": If the information is not sent in the appropiate format.
+        --> "No credentials were found": If the Authorization header is not present or if not value is sent.
+        
+    3. **Status Code 500** This mean some error happened during the execution of the request. In this case the response will be something like this:
+        ![image](https://user-images.githubusercontent.com/69249556/222307754-7d7d535a-bbee-4523-87fe-9a79f0aa6f8e.png)
+        
+ ## Authorization Process :thought_balloon:
+ 
+ As it was mentioned above some requests demand to have an Authorization header sent. This is because the written operation should be protected for unexpected behaviours. So for this case the format needed to make sure this validation is passed, is: user_name:user_password. The password is encoded and then storage in the database. 
+ After running the database script from section 2, you will have some test users in the database:
+ 1. fzanek:gggg
+ 2. testuser:test
+ 
+ So make sure that one of this combination is attached in the header for the requests mentioned above.
 
+## Task Mission Statement :thought_balloon:
+
+At adidas we care about serving our customers by making use of our data and services. Those services need to cope with high volume and low latency. In general, the topic of high availability is very important to be ready for the future and deal with the current state with confidence. Additionally following aspects are playing crucial role when designing solution architectures: reusability, data & information security, infrastructure resource usage efficiency, resiliency.
+
+Assignments:
+With the information given and additional assumptions of yours, you should
+develop* 2 micro-services:
+1) Product Review Service: implement CRUD operations for the resource /review/{product_id}, (e. g. AB1234), and the response is a JSON with following data: Product ID, Average Review Score, Number of Reviews. In order to protect the service, authentication is needed to protect write operations. Choose any datastore for data persistence that can be easily deployed or installed with the application. The datastore should contain seeded data for a few products.
+
+2) Product Service: The service will expose the resource /product/{product_id}, only supporting GET. The response should be an aggregation of our live Product API, (https://www.adidas.co.uk/api/products/{product_id} e.g. product_id = C77124), and the reviews retrieved from the Product Review Service for the same product_id.
+
+Expectations:
+Please use following primary tools: Typescript, NodeJS, REST API, Database
+Please develop this application with a microservice approach, all services should run independently.
+Please write API tests for your service endpoints.
+Every person having npm and some standard tools should be able to check out the code, build and run the app locally.
+Please, use English as a documentation language. Please comment complex and interesting parts of your code, so that one can follow the and understand the
+implementation logic.
+Upon completion, please check your solution into any public GIT repo (e.g. GitHub or Bitbucket) and share the respective link with us.
+
+Bonus Assignments:
+Please dockerize the component services and create config files for deploying them.
+Please create a CI/CD pipeline proposal for the app.
+
+## Thank you :thought_balloon:
+
+**Thank you!!** :blush:
