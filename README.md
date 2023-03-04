@@ -6,14 +6,14 @@ The idea is to have two microservices running and collaborating with each other 
 These are my notes on  how to set up the under listed service, technology for testing, my microservice architecture comprises the below microservice services.
 
 # Table of Contents :thought_balloon:
-1. [Introduction and technology list](#Introduction-and-technology-list)
+1. [Technology list](#Introduction-and-technology-list)
 2. [Manual Set-up Guide](#Manual-Set-up-Guide)
 3. [Microservice architecture](#Microservice-architecture)
 4. [Authorization Process](#Authorization-process)
 5. [Task Mission Statement](#Task-Mission-Statement)
 6. [Thank you](#Thank-you)
 
-## Introduction and technology list :thought_balloon:
+## Technology list :thought_balloon:
 NPM (9.5.0) Node.js(18.14.2) 
 
 Typescript
@@ -50,7 +50,7 @@ Use some resources
 1. Clone The master branch  using the below command  `` git clone https://github.com/francozanek29/product-review-microservices.git ``
 2. Make sure you have docker run on your machine [Docker website](https://www.docker.com/)
 3. Run the powershell script ``startproyect.sh`` to run all the commands and mount the docker images needed.
-4. Run the powershell script ``docker-compose exec commercial_db sh -c 'chmod u+x /database/seed-db.sh && /database/seed-db.sh' `` this will populate the database with some test data.
+4. When the 3 containers are up and running --> run the powershell script ``docker-compose exec commercial_db sh -c 'chmod u+x /database/seed-db.sh && /database/seed-db.sh' `` this will populate the database with some test data.
 5. As a result from steps 3 y 4, you will have running on your docker 3 containers:
      1. ms_commercial-db: In which the database is running. This is running on port 5000.
      2. ms_review-service: In which the code to access the database and handle the review information is running. This is running on port 4000.
