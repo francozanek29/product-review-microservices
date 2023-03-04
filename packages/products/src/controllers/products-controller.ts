@@ -13,4 +13,10 @@ export class ProductController{
 	async GetProductId(@Param("product_id") product_id: string){
         return await productService.HandleData(product_id);
     }
+
+    @Get('/health')
+    async CheckHealthEndpoint(){
+        return await "Everything looks good";
+    }
+    
 }
