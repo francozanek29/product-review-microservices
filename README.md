@@ -7,10 +7,10 @@ These are my notes on  how to set up the under listed service, technology for te
 
 # Table of Contents :thought_balloon:
 1. [Technology list](#Introduction-and-technology-list)
-2. [Manual Set-up Guide](#Manual-Set-up-Guide)
-3. [Microservice architecture](#Microservice-architecture)
-4. [Authorization Process](#Authorization-process)
-5. [Task Mission Statement](#Task-Mission-Statement)
+2. [Task Mission Statement](#Task-Mission-Statement)
+3. [Manual Set-up Guide](#Manual-Set-up-Guide)
+4. [Microservice architecture](#Microservice-architecture)
+5. [Authorization Process](#Authorization-process)
 6. [Thank you](#Thank-you)
 
 ## Technology list :thought_balloon:
@@ -44,6 +44,30 @@ Use some resources
   --> For data storage (S3 or DynamoDB)
   --> ECS to deploy the microservices so they are accesible in the web.
  
+ 
+## Task Mission Statement :thought_balloon:
+
+At adidas we care about serving our customers by making use of our data and services. Those services need to cope with high volume and low latency. In general, the topic of high availability is very important to be ready for the future and deal with the current state with confidence. Additionally following aspects are playing crucial role when designing solution architectures: reusability, data & information security, infrastructure resource usage efficiency, resiliency.
+
+Assignments:
+With the information given and additional assumptions of yours, you should
+develop* 2 micro-services:
+1) Product Review Service: implement CRUD operations for the resource /review/{product_id}, (e. g. AB1234), and the response is a JSON with following data: Product ID, Average Review Score, Number of Reviews. In order to protect the service, authentication is needed to protect write operations. Choose any datastore for data persistence that can be easily deployed or installed with the application. The datastore should contain seeded data for a few products.
+
+2) Product Service: The service will expose the resource /product/{product_id}, only supporting GET. The response should be an aggregation of our live Product API, (https://www.adidas.co.uk/api/products/{product_id} e.g. product_id = C77124), and the reviews retrieved from the Product Review Service for the same product_id.
+
+Expectations:
+Please use following primary tools: Typescript, NodeJS, REST API, Database
+Please develop this application with a microservice approach, all services should run independently.
+Please write API tests for your service endpoints.
+Every person having npm and some standard tools should be able to check out the code, build and run the app locally.
+Please, use English as a documentation language. Please comment complex and interesting parts of your code, so that one can follow the and understand the
+implementation logic.
+Upon completion, please check your solution into any public GIT repo (e.g. GitHub or Bitbucket) and share the respective link with us.
+
+Bonus Assignments:
+Please dockerize the component services and create config files for deploying them.
+Please create a CI/CD pipeline proposal for the app.
  
 ## Manual Set-up Guide :thought_balloon:
 
@@ -80,29 +104,16 @@ For this project two microservices were defined:
  
  So make sure that one of this combination is attached in the header for the requests mentioned above.
 
-## Task Mission Statement :thought_balloon:
+## Run unit tests :thought_balloon:
 
-At adidas we care about serving our customers by making use of our data and services. Those services need to cope with high volume and low latency. In general, the topic of high availability is very important to be ready for the future and deal with the current state with confidence. Additionally following aspects are playing crucial role when designing solution architectures: reusability, data & information security, infrastructure resource usage efficiency, resiliency.
+Each project has its own unit tests, you can run them individually running this command in the project folder.
 
-Assignments:
-With the information given and additional assumptions of yours, you should
-develop* 2 micro-services:
-1) Product Review Service: implement CRUD operations for the resource /review/{product_id}, (e. g. AB1234), and the response is a JSON with following data: Product ID, Average Review Score, Number of Reviews. In order to protect the service, authentication is needed to protect write operations. Choose any datastore for data persistence that can be easily deployed or installed with the application. The datastore should contain seeded data for a few products.
+`` npm test ``
 
-2) Product Service: The service will expose the resource /product/{product_id}, only supporting GET. The response should be an aggregation of our live Product API, (https://www.adidas.co.uk/api/products/{product_id} e.g. product_id = C77124), and the reviews retrieved from the Product Review Service for the same product_id.
-
-Expectations:
-Please use following primary tools: Typescript, NodeJS, REST API, Database
-Please develop this application with a microservice approach, all services should run independently.
-Please write API tests for your service endpoints.
-Every person having npm and some standard tools should be able to check out the code, build and run the app locally.
-Please, use English as a documentation language. Please comment complex and interesting parts of your code, so that one can follow the and understand the
-implementation logic.
-Upon completion, please check your solution into any public GIT repo (e.g. GitHub or Bitbucket) and share the respective link with us.
-
-Bonus Assignments:
-Please dockerize the component services and create config files for deploying them.
-Please create a CI/CD pipeline proposal for the app.
+You can also go to the repository folder and run:
+1. `` npm run test:all `` --> To execute the tests from both projects (Products and Reviews)
+2. `` npm run test:products `` --> To execute only the tests for the product project
+3. `` npm run test:reviews `` --> To execute only the tests for the review project
 
 ## Thank you :thought_balloon:
 
