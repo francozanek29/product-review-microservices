@@ -11,7 +11,8 @@ These are my notes on  how to set up the under listed service, technology for te
 3. [Manual Set-up Guide](#Manual-Set-up-Guide)
 4. [Microservice architecture](#Microservice-architecture)
 5. [Authorization Process](#Authorization-process)
-6. [Thank you](#Thank-you)
+6. [Run unit tests](#Run-unit-tests)
+7. [Thank you](#Thank-you)
 
 ## Technology list :thought_balloon:
 NPM (9.5.0) Node.js(18.14.2) 
