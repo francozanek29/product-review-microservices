@@ -14,8 +14,7 @@ These are my notes on  how to set up the under listed service, technology for te
 6. [Thank you](#Thank-you)
 
 ## Introduction and technology list :thought_balloon:
-[NPM](https://www.npmjs.com/)
-Version 6.14.14
+NPM (9.5.0) Node.js(18.14.2) 
 
 Typescript
 Version 4.9.5
@@ -24,20 +23,16 @@ Version 4.9.5
 
 [Docker](http://docker.com).
 
-Containerization Application 
-
 [GIT](http://git.com).
 
-Source code repository
-
 [Visual Studio Code](https://code.visualstudio.com/)
-Code Editor
 
-**Other artifacts would have implemented if time permits**
+**Other artifacts would have used if time permits**
 
 [ELK].
 
 *Elastic Search*
+
 *Kibana*
 
 To implement Distributed logging.
@@ -54,14 +49,13 @@ Use some resources
 
 1. Clone The master branch  using the below command  `` git clone https://github.com/francozanek29/product-review-microservices.git ``
 2. Make sure you have docker run on your machine [Docker website](https://www.docker.com/)
-3. Go inside of each sub-project folder (./packages/products and ./packages/reviews) and install all the dependencies (`` npm install``)
-4. Go to the project root folder and execute the command ``npm run start:docker``. This will create the docker images and will export them into docker. Take into account the first time might take some time to build and export the images. If you don´t have the mongoDB image download, the process will take a couple of minutes to download and install it.
-5. As a result from step 4, you will have running on your docker 3 containers:
+3. Run the powershell script ``startproyect.sh`` to run all the commands and mount the docker images needed.
+4. Run the powershell script ``docker-compose exec commercial_db sh -c 'chmod u+x /database/seed-db.sh && /database/seed-db.sh' `` this will populate the database with some test data.
+5. As a result from steps 3 y 4, you will have running on your docker 3 containers:
      1. ms_commercial-db: In which the database is running. This is running on port 5000.
      2. ms_review-service: In which the code to access the database and handle the review information is running. This is running on port 4000.
      3. ms_product-service: In which the code to access public API and connect to the second container is running. This is running on port 3000.
-6. Go to the root folder and run this command ``docker-compose exec commercial_db sh -c 'chmod u+x /database/seed-db.sh && /database/seed-db.sh' `` this will populate the database with some test data.
-7. Test the functionality using the providers enpoints and architecture.
+6. Test the functionality using the providers enpoints and architecture, you can use Postman to do this taking into account the documentation described below.
 
 ## Microservice architecture diagram :thought_balloon:
 ![image](https://user-images.githubusercontent.com/69249556/222305405-e5d99a9f-3259-4025-8873-2027e991cf67.png)
