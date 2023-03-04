@@ -64,10 +64,7 @@ For this project two microservices were defined:
 
 1.**Product Service**: Which is charge of connect to the Public API (https://www.adidas.co.uk/api/products/{product_id}) and aggregate to this response an object with contains the information of Number of Review received by the product and the Average Score of those reviews (information received from the other service).
 
-                       ![image](https://user-images.githubusercontent.com/69249556/222306020-041f7f1a-2333-4df7-a5aa-4b15087657b9.png)
-
-
-The documentation for this API is [here](https://app.swaggerhub.com/apis/ZANEKFRANCO_1/ProductService/1.0.0).
+**The documentation for this API is [here](https://app.swaggerhub.com/apis/ZANEKFRANCO_1/ProductService/1.0.0).**
 
 
 2. **Product Review Service**: Which is charge on handling all the reviews for all the products and storage them on some database (in this case in a local mongoDB database). For this service the available endpoints are:
