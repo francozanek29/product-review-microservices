@@ -67,16 +67,7 @@ For this project two microservices were defined:
                        ![image](https://user-images.githubusercontent.com/69249556/222306020-041f7f1a-2333-4df7-a5aa-4b15087657b9.png)
 
 
-In the service the endpoint available is:
-_product/{product_id}_: For which no authentication or authorization is needed, and the responses according to the possible http status code will be:
-
-  a. **Status Code = 200**  This case represents the success of the request, the response will be the one shown above.
-  b. **Status Code = 404**  This case represents an exception thrown by the API to show the Product sent in the request was not found in the public API, however if the product is found in the API but not in the Product Review Service, this will not be an issue because this mean that there are not reviews for the product, so default values are shown. An example of this status code is shown below:
- 
- ![image](https://user-images.githubusercontent.com/69249556/222307645-cb6ea450-f139-44aa-9f84-13e8b2907e3e.png)
-
-  c. **Status Code = 500** This case represent an internal error during the execution of the request. An example for this response is shown below:
-  ![image](https://user-images.githubusercontent.com/69249556/222307754-7d7d535a-bbee-4523-87fe-9a79f0aa6f8e.png)
+The documentation for this API is [here](https://app.swaggerhub.com/apis/ZANEKFRANCO_1/ProductService/1.0.0).
 
 
 2. **Product Review Service**: Which is charge on handling all the reviews for all the products and storage them on some database (in this case in a local mongoDB database). For this service the available endpoints are:
