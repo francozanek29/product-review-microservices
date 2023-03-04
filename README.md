@@ -55,7 +55,7 @@ Use some resources
      1. ms_commercial-db: In which the database is running. This is running on port 5000.
      2. ms_review-service: In which the code to access the database and handle the review information is running. This is running on port 4000.
      3. ms_product-service: In which the code to access public API and connect to the second container is running. This is running on port 3000.
-6. Test the functionality using the providers enpoints and architecture, you can use Postman to do this taking into account the documentation described below.
+6. Test the functionality using the providers enpoints and architecture, you can use Postman to do. Taking into account the documentation described below.
 
 ## Microservice architecture diagram :thought_balloon:
 ![image](https://user-images.githubusercontent.com/69249556/222305405-e5d99a9f-3259-4025-8873-2027e991cf67.png)
