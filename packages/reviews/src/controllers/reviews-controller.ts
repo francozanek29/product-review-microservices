@@ -13,6 +13,11 @@ const succesMessage = "The requested operation was executed successfully."
 @JsonController()
 export class ReviewsController{
 
+    @Get('/health')
+    async CheckHealthEndpoint(){
+        return await "Everything looks good";
+    }
+    
     @Get('/review/:product_id')
 	async GetProductReviewSummary(@Param("product_id") product_id: string){
         return await productReviewService.GetSummaryReviewsByProductId(product_id);
