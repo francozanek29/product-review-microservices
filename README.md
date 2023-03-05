@@ -12,7 +12,8 @@ These are my notes on  how to set up the under listed service, technology for te
 4. [Microservice architecture](#Microservice-architecture)
 5. [Authorization Process](#Authorization-process)
 6. [Run unit tests](#Run-unit-tests)
-7. [Thank you](#Thank-you)
+7. [Things that can be improved](#Things-that-can-be-improved)
+8. [Thank you](#Thank-you)
 
 ## Technology list :thought_balloon:
 NPM (9.5.0) Node.js(18.14.2) 
@@ -74,13 +75,15 @@ Please create a CI/CD pipeline proposal for the app.
 
 1. Clone The master branch  using the below command  `` git clone https://github.com/francozanek29/product-review-microservices.git ``
 2. Make sure you have docker run on your machine [Docker website](https://www.docker.com/)
-3. Run the powershell script ``startproyect.sh`` to run all the commands and mount the docker images needed.
-4. When the 3 containers are up and running --> run the powershell script ``docker-compose exec commercial_db sh -c 'chmod u+x /database/seed-db.sh && /database/seed-db.sh' `` this will populate the database with some test data.
-5. As a result from steps 3 y 4, you will have running on your docker 3 containers:
+3. Go inside the package/products folder and install all the dependecies.
+4. Go inside the package/reviews foler and install all the dependecies.
+5. Go to the folder repository and execute this command to mount all the docker images ``npm run start:docker``
+6. When the 3 containers are up and running --> run the powershell script ``docker-compose exec commercial_db sh -c 'chmod u+x /database/seed-db.sh && /database/seed-db.sh' `` this will populate the database with some test data.
+7. As a result from steps 3 y 4, you will have running on your docker 3 containers:
      1. ms_commercial-db: In which the database is running. This is running on port 5000.
      2. ms_review-service: In which the code to access the database and handle the review information is running. This is running on port 4000.
      3. ms_product-service: In which the code to access public API and connect to the second container is running. This is running on port 3000.
-6. Test the functionality using the providers enpoints and architecture, you can use Postman to do. Taking into account the documentation described below.
+8. Test the functionality using the providers enpoints and architecture, you can use Postman to do. Taking into account the documentation described below.
 
 ## Microservice architecture diagram :thought_balloon:
 ![image](https://user-images.githubusercontent.com/69249556/222305405-e5d99a9f-3259-4025-8873-2027e991cf67.png)
@@ -118,7 +121,7 @@ You can also go to the repository folder and run:
 
 Make sure the docker images are not running before you execute the tests.
 
-## Things that could improve :thought_balloon:
+## Things that can be improved :thought_balloon:
 
 We can define a common library for both microservices but taking into account the complexity of the exercise and the complexity to the implement the library and integrate it with both microservices, I thought it would be easier and better for the excercise to implement like it´s.
 
