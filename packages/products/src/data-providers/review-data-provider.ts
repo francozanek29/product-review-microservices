@@ -8,9 +8,6 @@
 import { requestGet } from '../utils/gateaway-handler'
 import * as CircuitBreaker from 'opossum'
 import logger from '../utils/logger';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
 
 async function GetReviewFromDataSource(product_id:string){
     
