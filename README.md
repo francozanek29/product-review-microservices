@@ -118,6 +118,12 @@ You can also go to the repository folder and run:
 
 Make sure the docker images are not running before you execute the tests.
 
+## Things that could improve :thought_balloon:
+
+We can define a common library for both microservices but taking into account the complexity of the exercise and the complexity to the implement the library and integrate it with both microservices, I thought it would be easier and better for the excercise to implement like it´s.
+
+We can also think in the strategy for multiple-repos one for each service, but again the complexity of the excecirse make easier to implement eveyrthing in one repository.
+
 ## Thank you :thought_balloon:
 
 **Thank you!!** :blush:
