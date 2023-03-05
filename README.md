@@ -116,6 +116,8 @@ You can also go to the repository folder and run:
 2. `` npm run test:products `` --> To execute only the tests for the product project
 3. `` npm run test:reviews `` --> To execute only the tests for the review project
 
+Make sure the docker images are not running before you execute the tests.
+
 ## Thank you :thought_balloon:
 
 **Thank you!!** :blush:
