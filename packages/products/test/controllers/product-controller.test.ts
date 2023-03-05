@@ -4,8 +4,6 @@ import * as test_helper from "../utils/helpers";
 const request = require("supertest");
 const expressServer = require("../../src/index");
 const dotenv = require("dotenv");
-dotenv.config();
-
 const mock_get = jest.spyOn(axios, 'get');
 
 /**

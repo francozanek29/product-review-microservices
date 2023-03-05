@@ -2,7 +2,6 @@ import * as test_helper from "../utils/helper";
 const request = require("supertest");
 const expressServer = require("../../src/index");
 const dotenv = require("dotenv");
-dotenv.config();
 import { User } from "../../src/entities/user-models/user-model";
 import { ProductReview } from "../../src/entities/product-review-models/product-review";
 import { InternalServerError } from "routing-controllers";
